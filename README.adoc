@@ -41,6 +41,70 @@ mxkdkjf4i7738o0z4k3ydneeh     worker2             Ready               Active    
 ----
 
 ////
+. finnaly let's start Docker UCP
+
+----
+df -h /var/lib
+sudo mount --make-shared /
+
+export ADV_IP=$(ifconfig eth1 | grep 'inet ' | awk '{print $2}' | awk -F ':' '{print $2}')
+docker container run --rm -it --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  docker/ucp:2.1.3 install \
+    --force-insecure-tcp \
+    --host-address=$(hostname -i) \
+    --admin-username=admin \
+    --admin-password=Admin.123
+
+Unable to find image 'docker/ucp:2.1.3' locally
+2.1.3: Pulling from docker/ucp
+709515475419: Pull complete
+0b9a065c6a45: Pull complete
+4750d5ec00dc: Pull complete
+Digest: sha256:8acdbc931a3363a9501cdd91bb5e33630be7f802e36479ec2bb666f292e1ad25
+Status: Downloaded newer image for docker/ucp:2.1.3
+INFO[0000] Verifying your system is compatible with UCP 2.1.3 (5d582f7)
+INFO[0000] Your engine version 18.03.1-ce, build 9ee9f40 (4.4.0-96-generic) is compatible
+INFO[0000] Pulling required images... (this may take a while)
+
+WARN[0060] None of the hostnames we'll be using in the UCP certificates [manager2 127.0.0.1 172.17.0.1 192.168.0.4] contain a domain component.  Your generated certs may fail TLS validation unless you only use one of these shortnames or IPs to connect.  You can use the --san flag to add more aliases
+
+WARN[0000] The Docker port is externally accessible on this node, accepting connections on port 2375. This node is insecure. Learn more at https://docker.com/ddc-18
+INFO[0006] Establishing mutual Cluster Root CA with Swarm
+INFO[0009] Installing UCP with host address 192.168.0.4 - If this is incorrect, please specify an alternative address with the '--host-address' flag
+INFO[0009] Generating UCP Client Root CA
+INFO[0009] Deploying UCP Service
+INFO[0045] Installation completed on manager2 (node sxqaf4m1p6hkh2lxerz44kghe)
+INFO[0054] Installation completed on worker1 (node uftenh9nbnbb4ny180l7dobgd)
+INFO[0057] Installation completed on worker2 (node mxkdkjf4i7738o0z4k3ydneeh)
+INFO[0082] Installation completed on manager1 (node uxljmggx1ktae0v7qqbvqz78s)
+INFO[0085] Installation completed on manager3 (node sjrlyorkt7jw0ax69e19fjvyw)
+INFO[0085] UCP Instance ID: SCTY:4N5N:JCP6:IEFN:QMOR:UNDP:HUZN:IDUU:DWQM:GE6J:LIKI:576U
+INFO[0085] UCP Server SSL: SHA-256 Fingerprint=EA:7A:B9:08:A2:AA:D4:29:08:4C:5D:98:7C:FA:63:67:13:DA:72:E5:B9:45:E8:30:3D:75:09:28:F5:FB:7C:2E
+INFO[0085] Login to UCP at https://192.168.0.4:443
+INFO[0085] Username: admin
+INFO[0085] Password: (your admin password)
+
+# wait for finish...
+
+[manager2] (local) root@192.168.0.4 ~
+$ docker ps
+CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS                   PORTS                                                                             NAMES
+42572d521e20        docker/ucp-controller:2.1.3   "/bin/controller ser…"   5 minutes ago       Up 5 minutes (healthy)   0.0.0.0:443->8080/tcp                                                             ucp-controller
+2639136ba98d        docker/ucp-swarm:2.1.3        "/bin/swarm manage -…"   5 minutes ago       Up 5 minutes             0.0.0.0:2376->2375/tcp                                                            ucp-swarm-manager
+91af9b10a5db        docker/ucp-metrics:2.1.3      "/bin/entrypoint.sh …"   5 minutes ago       Up 5 minutes             0.0.0.0:12387->12387/tcp                                                          ucp-metrics
+9082f0251eb3        docker/ucp-auth:2.1.3         "/usr/local/bin/enzi…"   5 minutes ago       Up 5 minutes             0.0.0.0:12385->4443/tcp                                                           ucp-auth-api
+b21b95e2ec27        docker/ucp-auth:2.1.3         "/usr/local/bin/enzi…"   5 minutes ago       Up 5 minutes (healthy)   0.0.0.0:12386->4443/tcp                                                           ucp-auth-worker
+c44727fda4d4        docker/ucp-auth-store:2.1.3   "rethinkdb --bind al…"   5 minutes ago       Up 5 minutes             0.0.0.0:12383-12384->12383-12384/tcp                                              ucp-auth-store
+f773847b6165        docker/ucp-etcd:2.1.3         "/bin/etcd --data-di…"   5 minutes ago       Up 5 minutes (healthy)   2380/tcp, 4001/tcp, 7001/tcp, 0.0.0.0:12380->12380/tcp, 0.0.0.0:12379->2379/tcp   ucp-kv
+fbc14e657680        docker/ucp-cfssl:2.1.3        "/bin/ucp-ca serve -…"   5 minutes ago       Up 5 minutes             0.0.0.0:12382->12382/tcp                                                          ucp-client-root-ca
+4ceccafe148a        docker/ucp-cfssl:2.1.3        "/bin/ucp-ca serve -…"   5 minutes ago       Up 5 minutes             0.0.0.0:12381->12381/tcp                                                          ucp-cluster-root-ca
+b30f814878b5        docker/ucp-agent:2.1.3        "/bin/ucp-agent prox…"   5 minutes ago       Up 5 minutes             0.0.0.0:12376->2376/tcp                                                           ucp-proxy
+6487bfb5051b        docker/ucp-agent:2.1.3        "/bin/ucp-agent agent"   5 minutes ago       Up 5 minutes             2376/tcp                                                                          ucp-agent.sxqaf4m1p6hkh2lxerz44kghe.eccf365ewyudj0de6ihn6m8r5
+----
+////
+
+////
 // to be continued...
 . trololo
 
