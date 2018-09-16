@@ -17,22 +17,22 @@ logs:
   image:https://raw.githubusercontent.com/daggerok/play-with-docker/master/images/image-04.png[]
 . now we can figure out some node IP to ssh into it: just copy command to ssh into one of your docker nodes:
   image:https://raw.githubusercontent.com/daggerok/play-with-docker/master/images/image-05.png[]
+. use it in yor terminal, like so:
 
-  .and use it in yor terminal, like so:
-  ----
-  ssh ip172-18-0-50-bef7u0igqbp000ftkoe0@direct.labs.play-with-docker.com
-  Connecting to 23.96.48.176:8022
-  ###############################################################
-  #                          WARNING!!!!                        #
-  # This is a sandbox environment. Using personal credentials   #
-  # is HIGHLY! discouraged. Any consequences of doing so are    #
-  # completely the user's responsibilites.                      #
-  #                                                             #
-  # The PWD team.                                               #
-  ###############################################################
-  [manager2] (local) root@192.168.0.4 ~
-  $ _
-  ----
+----
+ssh ip172-18-0-50-bef7u0igqbp000ftkoe0@direct.labs.play-with-docker.com
+Connecting to 23.96.48.176:8022
+###############################################################
+#                          WARNING!!!!                        #
+# This is a sandbox environment. Using personal credentials   #
+# is HIGHLY! discouraged. Any consequences of doing so are    #
+# completely the user's responsibilites.                      #
+#                                                             #
+# The PWD team.                                               #
+###############################################################
+[manager2] (local) root@192.168.0.4 ~
+$ _
+----
 
 ////
 // to be continued...
