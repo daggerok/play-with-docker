@@ -31,7 +31,13 @@ Connecting to 23.96.48.176:8022
 # The PWD team.                                               #
 ###############################################################
 [manager2] (local) root@192.168.0.4 ~
-$ _
+$ docker node ls
+ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS      ENGINE VERSION
+uxljmggx1ktae0v7qqbvqz78s     manager1            Ready               Active              Reachable           18.03.1-ce
+sxqaf4m1p6hkh2lxerz44kghe *   manager2            Ready               Active              Reachable           18.03.1-ce
+sjrlyorkt7jw0ax69e19fjvyw     manager3            Ready               Active              Leader              18.03.1-ce
+uftenh9nbnbb4ny180l7dobgd     worker1             Ready               Active                                  18.03.1-ce
+mxkdkjf4i7738o0z4k3ydneeh     worker2             Ready               Active                                  18.03.1-ce
 ----
 
 ////
